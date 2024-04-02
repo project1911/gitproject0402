@@ -5,9 +5,6 @@
 
 ![image](https://github.com/project1911/gitproject0402/assets/165736610/ab4f357b-bf90-42bf-9040-014c38747e51)
 
-![範例圖片 2](https://fakeimg.pl/500/)
-![範例圖片 3](https://fakeimg.pl/500/)
-
 ## 專案技術
 
 - Node.js v16.15.0
