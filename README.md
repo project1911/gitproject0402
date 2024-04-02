@@ -1,1 +1,1 @@
-<img src="https://fakeimg.pl/300x200/200">
+<img src="https://fakeimg.pl/1200x300/200">
