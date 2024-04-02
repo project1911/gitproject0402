@@ -3,7 +3,8 @@
 
 > 可提供 1~3 張圖片，讓觀看者透過 README 了解整體畫面
 
-![範例圖片 1](https://fakeimg.pl/500/)
+![範例圖片 1](![image](https://github.com/project1911/gitproject0402/assets/165736610/ff195d63-2ecc-4297-8ef2-1afe137a94f2)
+)
 ![範例圖片 2](https://fakeimg.pl/500/)
 ![範例圖片 3](https://fakeimg.pl/500/)
 
