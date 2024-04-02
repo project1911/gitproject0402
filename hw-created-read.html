@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/myall.css">
+</head>
+
+<body>
+    <div class="container py-5">
+        <table class="table table-bordered table-hover table-sm border-danger table-rwd">
+            <caption class="text-end">作品列表</caption>
+            <thead class="table-dark">
+                <tr class="table-active">
+                    <th>作品編號</th>
+                    <th>作品標題</th>
+                    <th>作品內容</th>
+                    <th>作品作者</th>
+                    <th>創作時間</th>
+                </tr>
+            </thead>
+            <tbody id="mydata">
+                <tr>
+                    <td>作品編號</td>
+                    <td>作品標題</td>
+                    <td>作品內容</td>
+                    <td>作品作者</td>
+                    <td>創作時間</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" id="pageList">
+                <li class="page-item"><a class="page-link" href="#" onclick="drawTable(0)">1</a></li>
+            </ul>
+        </nav>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var newData = [];
+        $(function () {
+            //讀取作品資料
+            $.ajax({
+                type: "GET",
+                url: "hw-Read-created-api.php",
+                async: false,
+                dataType: "json",
+                success: showdata,
+                error: function () {
+                    alert("error-hw-Read-created-api.php");
+                }
+            });
+        })
+
+        function showdata(data) {
+            //整理資料儲存為二維陣列
+            data.data.forEach(function (item, key) {
+                console.log(key);
+                if (key % 10 == 0) {
+                    newData.push([]);
+                }
+                var page = parseInt(key / 10);
+                newData[page].push(item);
+            });
+            drawTable(0);
+
+            //產生頁碼
+            $("#pageList").empty();
+            newData.forEach(function (item, key) {
+                var thisPage = key + 1;
+                var strHTML = '<li class="page-item"><a class="page-link" href="#" onclick="drawTable(' + key + ')">' + thisPage + '</a></li>';
+                $("#pageList").append(strHTML);
+            });
+            console.log(newData);
+        }
+
+        function drawTable(page) {
+            $("#mydata").empty();
+            newData[page].forEach(function (item) {
+                var strHTML = '<tr><td>' + item.id + '</td><td>' + item.title + '</td><td>' + item.content + '</td><td>' + item.creater + '</td><td>' + item.createtime + '</td></tr>';
+                $("#mydata").append(strHTML);
+            });
+        }
+    </script>
+</body>
+
+</html>

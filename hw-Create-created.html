@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品創作</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/myall.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>發表文章</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label for="creater" class="form-label h3">作者:</label>
+                    <span id="creatername" class="h3"></span>
+                    <input type="text" class="form-control d-none" id="creater" name="creater" placeholder="字數上限30字" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label for="title" class="form-label">標題</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="字數上限30字" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label for="content" class="form-label">內容</label>
+                    <textarea id="content" name="content" cols="100" style="height: 300px;" class="form-control"
+                        placeholder="字數上限10000字"></textarea>
+                    <div id="charCount">字數:0/10000</div>
+                </div>
+            </div>
+        </div>
+        <div class="text-end">
+            <button onclick="copyText()" class="btn btn-primary" id="created_btn">發送</button>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+        const input = document.getElementById('content');
+        const charCount = document.getElementById('charCount');
+        var flag_title = false;
+        var flag_content = false;
+
+        input.addEventListener('input', function () {
+            const inputText = this.value;
+            const charLength = inputText.length;
+            charCount.textContent = '字數:' + charLength + '/10000';
+
+            if (charLength > 10000) {
+                this.value = inputText.substring(0, 10000);
+                charCount.textContent = '字數:' + 10000 + ' / ' + 10000;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const dynamicSpan = document.getElementById('creatername');
+            const specifiedString = "";
+            dynamicSpan.textContent = specifiedString;
+        });
+
+        $(function () {
+            if (getCookie("UID01") != "") {
+                var dataJSON = {};
+                dataJSON["UID01"] = getCookie("UID01");
+                console.log(JSON.stringify(dataJSON))
+                $.ajax({
+                    type: "POST",
+                    url: "hw-Check_UID-api.php",
+                    data: JSON.stringify(dataJSON),
+                    dataType: "json",
+                    success: showdata_Check_UID,
+                    error: function () {
+                        alert("error-hw-Check_UID-api.php");
+                    }
+                });
+            }
+
+            $("#title").bind("input propertychange", function () {
+                if ($(this).val().length < 31) {
+                    $(this).removeClass('is-invalid');
+                    $(this).addClass('is-valid');
+                    flag_title = true;
+                } else {
+                    $(this).removeClass('is-valid');
+                    $(this).addClass('is-invalid');
+                    flag_title = false;
+                }
+            });
+
+            $("#content").bind("input propertychange", function () {
+                if ($(this).val().length > 3) {
+                    $(this).removeClass('is-invalid');
+                    $(this).addClass('is-valid');
+                    flag_content = true;
+                } else {
+                    $(this).removeClass('is-valid');
+                    $(this).addClass('is-invalid');
+                    flag_content = false;
+                }
+            });
+
+            $("#created_btn").click(function () {
+                if (flag_title && flag_content) {
+                    var dataJSON = {};
+                    dataJSON["title"] = $("#title").val();
+                    dataJSON["content"] = $("#content").val();
+                    dataJSON["creater"] = $("#creater").val();
+                    console.log(JSON.stringify(dataJSON));
+
+                    //傳遞至後端執行註冊行為
+                    $.ajax({
+                        type: "POST",
+                        url: "hw-Create-created-api.php",
+                        data: JSON.stringify(dataJSON),
+                        dataType: "json",
+                        success: showdata,
+                        error: function () {
+                            alert("error-hw-Create-created-api.php");
+                        }
+                    });
+                } else {
+                    alert("欄位有錯請修正!");
+                }
+            });
+        })
+
+        function copyText() {
+            var creatername = document.getElementById("creatername").innerText;
+            document.getElementById("creater").value = creatername;
+        }
+
+        function showdata(data) {
+            console.log(data);
+            if (data.state) {
+                alert(data.message);
+                location.href = "hw-main.html"
+            } else {
+                alert(data.message);
+            }
+        }
+
+        function showdata_Check_UID(data) {
+            console.log(data);
+            if (data.state) {
+                $("#creater").text(data.data[0].Username);
+                $("#creatername").text(data.data[0].Username);
+            }
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+    </script>
+</body>
+
+</html>
