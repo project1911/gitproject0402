@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+  --mycolor01: #d3d7d8;
+  --mycolor02: #a13e97;
+  --mycolor03: #632a7e;
+  --mycolor04: #280e3b;
+  --mycolor05: #df4444;
+  --mycolorblack: #000000;
+  --mycolorred: #ff0000;
+  --mycolorgreen: #00ff00;
+  --mycolorblue: #0000ff;
+  --mycolorwhite: #ffffff;
+  --mycoloryellow: #ffff00;
+  --mycolorlightblue: #00ffff;
+  --mycolorpink: #ff00ff;
+  --mycolorlightblack: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+}
+.fw-900 {
+  font-weight: 900;
+}
+.fw-800 {
+  font-weight: 800;
+}
+.fw-700 {
+  font-weight: 700;
+}
+.fw-600 {
+  font-weight: 600;
+}
+.fw-500 {
+  font-weight: 500;
+}
+.fw-400 {
+  font-weight: 400;
+}
+.fw-300 {
+  font-weight: 300;
+}
+.fw-200 {
+  font-weight: 200;
+}
+.fw-100 {
+  font-weight: 100;
+}
+
+.mr-1 {
+  margin-right: 1px;
+}
+
+.mr-2 {
+  margin-right: 2px;
+}
+
+.mr-3 {
+  margin-right: 3px;
+}
+
+.mr-4 {
+  margin-right: 4px;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.mycolor01 {
+  color: var(--mycolor01);
+}
+
+.mycolor02 {
+  color: var(--mycolor02);
+}
+
+.mycolor03 {
+  color: var(--mycolor03);
+}
+
+.mycolor04 {
+  color: var(--mycolor04);
+}
+
+.mycolor05 {
+  color: var(--mycolor05);
+}
+.bg-cover {
+  background-position: center center;
+  background-size: cover;
+}
+
+.demo {
+  width: 100%;
+  padding: 25px;
+  margin: 25px;
+  border: 2px solid var(--mycolor03);
+}
+
+.bg-red {
+  background-color: var(--mycolorred);
+}
+
+.bg-blue {
+  background-color: var(--mycolorblue);
+}
+
+.bg-green {
+  background-color: var(--mycolorgreen);
+}
+
+.bg-white {
+  background-color: var(--mycolorwhite);
+}
+
+.bg-black {
+  background-color: var(--mycolorblack);
+}
+
+.bg-yellow {
+  background-color: var(--mycoloryellow);
+}
+
+.box {
+  height: 160px;
+  background-color: var(--mycolor01);
+  border: 2px solid var(--mycolor02);
+  margin-top: 15px;
+}
+
+.box01 {
+  height: 280px;
+  border: 2px solid var(--mycolorblack);
+}
+
+.box02 {
+  height: 400px;
+  border: 2px solid var(--mycolor02);
+}
+
+.border01 {
+  border: 2px solid var(--mycolorblack);
+}
+
+.box04 {
+  height: 600px;
+  border: 2px solid var(--mycolor02);
+}

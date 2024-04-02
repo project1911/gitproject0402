@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>甜食-產品細節</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/myall.css">
+    <style>
+        .banner{
+            height: 320px;
+            background-image: url(../image/sweetcake03.jpg);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-900 text-warning" href="20231226-cake-index.html">甜食.sweet</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="20231226-cake-index.html">首頁</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="20231226-cake-about.html">關於</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  服務項目
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">服務一</a></li>
+                  <li><a class="dropdown-item" href="#">服務二</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">服務三</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="20231226-product.html">產品介紹</a>
+              </li>
+            </ul>
+            <!--<form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>-->
+          </div>
+        </div>
+    </nav>
+    <div class="banner bg-info bg-cover"></div>
+    <div class="container">
+        <h2 class="text-danger fw-900">|產品細節<small class="fw-100 text-muted">Details</small></h2>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="myimg bg-cover" style="background-image: url(../image/cake02.jpg); height: 480px;"></div>
+                <div class="bg-secondary w-100">
+                    <div class="list-unstyled d-flex justify-content-between flex-nowrap overflow-auto" id="mydata">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>焦糖海鹽夢幻千層</h2>
+                <p>焦糖香濃，海鹽微鹹，層層酥脆。</p>
+                <p>單價: NT$330/片</p>
+                <p>成份
+                    <span class="badge text-bg-danger">巧克力</span>
+                    <span class="badge text-bg-warning">榛果</span>
+                    <span class="badge text-bg-info">奶油</span>
+                </p>
+                <div>
+                    <label for="" class="form-label">數量</label>
+                    <input type="number" class="form-control" id="numcake" min="1" max="30">
+                    <p class="mt-3">總計:</p>
+                </div>
+                <button class="btn btn-success mt-3">確認</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer bg-dark text-white text-center fw-900 py-3 mt-3">
+        @甜食 2023製作
+      </div>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.7.1.min.js"></script>
+      <script>
+        $(function(){
+            $.ajax({
+                type:"GET",
+                url:"js/cake-by-chatgpt.json",
+                success: showdata,
+                error: function(){
+                    alert("串接資料錯誤");
+                }
+            });
+        });
+        function showdata(data){
+            console.log(data);
+            //console.log(data[0].品名)
+            //console.log(data[0]["品名"])
+            $("#mydata").empty
+            for(var i=0; i<10; i++){
+                console.log(data[i].品名)
+                var strHTML = '<li class="text-nowrap p-1 me-0"><div class="bg-cover" style="background-image: url(' + data[i].圖片路徑 + '); width: 160px;height: 160px;"></div></li>';
+
+                $("#mydata").append(strHTML)
+            }
+        }
+      </script>
+</body>
+
+</html>

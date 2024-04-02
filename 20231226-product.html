@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>甜食-產品介紹</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/myall.css">
+    <style>
+        .banner{
+            height: 320px;
+            background-image: url(../image/sweetcake02.jpg);
+        }
+        .ping:hover{
+            box-shadow: 1px 1px 1px 1px var(--mycolor05);
+            border-radius: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-900 text-warning" href="20231226-cake-index.html">甜食.sweet</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="20231226-cake-index.html">首頁</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="20231226-cake-about.html">關於</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  服務項目
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">服務一</a></li>
+                  <li><a class="dropdown-item" href="#">服務二</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">服務三</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="20231226-product.html">產品介紹</a>
+              </li>
+            </ul>
+            <!--<form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>-->
+          </div>
+        </div>
+    </nav>
+    <div class="banner bg-info bg-cover"></div>
+    <div class="container">
+        <h2 class="text-danger fw-900">|產品介紹<small class="fw-100 text-muted">Product</small></h2>
+        <div class="row" id="mydata">
+            <!--
+                <div class="col-md-4 text-center mt-3">
+                    <div class="ping bg-cover" style="background-image: url(../image/   cake01.jpg); height: 220px;"></div>
+                    <h3>夢幻芒果慕斯</h3>
+                    <p>NT$300</p>
+                    <p>芒果香濃，輕盈清爽，夏日最佳選擇。</p>
+                    <a href="#" class="btn btn-success w-100">查看</a>
+                </div>
+                <div class="col-md-4 text-center mt-3">
+                    <div class="ping bg-cover" style="background-image: url(../image/   cake01.jpg); height: 220px;"></div>
+                    <h3>夢幻芒果慕斯</h3>
+                    <p>NT$300</p>
+                    <p>芒果香濃，輕盈清爽，夏日最佳選擇。</p>
+                    <a href="#" class="btn btn-success w-100">查看</a>
+                </div>
+                <div class="col-md-4 text-center mt-3">
+                    <div class="ping bg-cover" style="background-image: url(../image/   cake01.jpg); height: 220px;"></div>
+                    <h3>夢幻芒果慕斯</h3>
+                    <p>NT$300</p>
+                    <p>芒果香濃，輕盈清爽，夏日最佳選擇。</p>
+                    <a href="#" class="btn btn-success w-100">查看</a>
+                </div>
+                <div class="col-md-4 text-center mt-3">
+                    <div class="ping bg-cover" style="background-image: url(../image/   cake01.jpg); height: 220px;"></div>
+                    <h3>夢幻芒果慕斯</h3>
+                    <p>NT$300</p>
+                    <p>芒果香濃，輕盈清爽，夏日最佳選擇。</p>
+                    <a href="#" class="btn btn-success w-100">查看</a>
+                </div>
+            -->
+        </div>
+    </div>
+    <div class="footer bg-dark text-white text-center fw-900 py-3 mt-4">
+        @甜食 2023製作
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $.ajax({
+                type:"GET",
+                url:"js/cake-by-chatgpt.json",
+                success: showdata,
+                error: function(){
+                    alert("串接資料錯誤");
+                }
+            });
+        });
+        function showdata(data){
+            console.log(data);
+            //console.log(data[0].品名)
+            //console.log(data[0]["品名"])
+            $("#mydata").empty
+            for(var i=0; i<10; i++){
+                console.log(data[i].品名)
+                var strHTML = '<div class="col-md-4 text-center mt-3"><div class="ping bg-cover" style="background-image: url(' +  data[i].圖片路徑 + '); height: 220px;"></div><h3>' + data[i].品名 + '</h3><p>' + data[i].單價 + '</p><p>' + data[i].簡介 + '</p><a href="20231226-cake-details.html" class="btn btn-success w-100" target="_blank">查看</a></div>'
+                $("#mydata").append(strHTML)
+            }
+        }
+    </script>
+</body>
+
+</html>
